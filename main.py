@@ -16,6 +16,7 @@ py = 250 # start pos is above the ground for the drop effect
 gravity = 3
 xvel = 0
 yvel = 0
+
 jump_height = 9
 jumping = False
 colliding = False
@@ -48,13 +49,13 @@ while run:
 
     keys = pygame.key.get_pressed()
     if keys[pygame.K_LEFT] and px > 0:
-        xvel
+        xvel += 3
     if keys[pygame.K_RIGHT] and px < (800-55):
-        xvel +=  =  
+        xvel -= 3
     if jumping == False and colliding == True:
         if keys[pygame.K_UP]:
             for i in range(65):
-                py -= 1
+                yvel -= 30
             jumping = True
         jumping = False
 
