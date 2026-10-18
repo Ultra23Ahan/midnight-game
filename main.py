@@ -13,7 +13,7 @@ gx = 0
 gy = 500
 px = gx + 20
 py = 250 # start pos is above the ground for the drop effect
-gravity = 3
+gravity = 0.35759
 xvel = 0
 yvel = 0
 
@@ -36,26 +36,24 @@ while run:
     screen.fill((0,0,0))
 
     yvel += gravity
+    py += yvel
     px += xvel
-    xvel = xvel*friction
+    xvel *=friction
     player_rect = pygame.Rect(px, py, 55, 55)
     ground_rect = pygame.Rect(gx, gy, 800, 200)
     if player_rect.colliderect(ground_rect):
+        yvel = 0
         gravity = 0
         colliding = True
-    else:
-        gravity = 3
-        colliding = False
 
     keys = pygame.key.get_pressed()
     if keys[pygame.K_LEFT] and px > 0:
-        xvel += 3
+        xvel = -3
     if keys[pygame.K_RIGHT] and px < (800-55):
-        xvel -= 3
+        xvel = 3
     if jumping == False and colliding == True:
         if keys[pygame.K_UP]:
-            for i in range(65):
-                yvel -= 30
+            yvel = -3
             jumping = True
         jumping = False
 
