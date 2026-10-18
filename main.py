@@ -20,7 +20,7 @@ yvel = 0
 jump_height = 9
 jumping = False
 colliding = False
-friction = 0.95
+friction = 0.94
 
 clock = pygame.time.Clock()
 run = True
@@ -43,7 +43,6 @@ while run:
     ground_rect = pygame.Rect(gx, gy, 800, 200)
     if player_rect.colliderect(ground_rect):
         yvel = 0
-        py -= 1 # for some visual stuff
         gravity = 0
         colliding = True
     else:
