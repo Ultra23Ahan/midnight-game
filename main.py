@@ -5,8 +5,8 @@ pygame.init()
 screen = pygame.display.set_mode((800, 600))
 pygame.display.set_caption(title="MidNight")
 
-player = pygame.image.load("./assets/player/player.svg").convert_alpha()
-ground = pygame.image.load("./assets/ground/ground.svg").convert_alpha()
+player = pygame.image.load("./assets/player.svg").convert_alpha()
+ground = pygame.image.load("./assets/ground.svg").convert_alpha()
 ground = pygame.transform.scale(ground, (800, 200))
 
 gx = 0
@@ -22,18 +22,16 @@ jumping = False
 colliding = False
 friction = 0.94
 
-clock = pygame.time.Clock()
-run = True
-while run:
-    clock.tick(60)
-    
-    for i in pygame.event.get():
-        if i.type == pygame.QUIT:
-            run = False
-
-
-    screen.fill((0,0,0))
-
+def player_movement():
+    global xvel
+    global yvel
+    global gravity
+    global colliding
+    global px
+    global py
+    global gx
+    global gy
+    global jumping
     yvel += gravity
     py += yvel
     px += xvel
@@ -50,19 +48,38 @@ while run:
         colliding = False
 
     keys = pygame.key.get_pressed()
-    if keys[pygame.K_LEFT] and px > 0:
-        xvel = -5
+    if keys[pygame.K_LEFT] and px > 0+55:
+        xvel = -9
     if keys[pygame.K_RIGHT] and px < (800-55):
-        xvel = 5
+        xvel = 9
     if jumping == False and colliding == True:
         if keys[pygame.K_UP]:
             yvel = -10
             jumping = True
         jumping = False
 
-        
+
+
+
+
+clock = pygame.time.Clock()
+run = True
+while run:
+    clock.tick(60)
+    
+    for i in pygame.event.get():
+        if i.type == pygame.QUIT:
+            run = False
+
+
+    screen.fill((0,0,0))
+
+    player_movement()
+
+
     screen.blit(ground, (gx, gy))
     screen.blit(player, (px, py))
+
     pygame.display.flip()
     
 pygame.quit()
